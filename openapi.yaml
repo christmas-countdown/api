@@ -1,0 +1,84 @@
+openapi: 3.0.0
+info:
+  title: Christmas Countdown
+  version: pine
+  termsOfService: https://docs.christmascountdown.live/api/terms
+  contact:
+      name: Isaac
+      email: contact@christmascountdown.live
+      url: https://go.eartharoid.me/discord
+  license:
+      name: MIT
+      url: https://choosealicense.com/licenses/mit
+externalDocs:
+  url: https://docs.christmascountdown.live/api
+servers:
+  - url: https://api-dev.christmascountdown.live/{version}
+    description: Development API server
+    variables:
+      version:
+        default: pine
+  - url: https://api.christmascountdown.live/{version}
+    description: Production API server
+    variables:
+      version:
+        default: pine
+paths:
+  '/image':
+    get:
+      description: Get a winter/Christmas-themed photo
+      responses:
+        '200':
+          description: An image
+  '/joke':
+    get:
+      description: Get a Christmas joke
+      responses:
+        '200':
+          description: A joke
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  question:
+                    type: string
+                  answer:
+                    type: string
+              example:
+                question: 'How much did Santa pay for his sleigh?'
+                answer: 'Nothing – it was on the house.'
+                
+  '/live':
+    get:
+      description: Get the combined live time left until Christmas
+      responses:
+        '200':
+          description: The live time left until Christmas
+  '/total':
+    get:
+      description: Get the combined total time left
+      responses:
+        '200':
+          description: The live time left until Christmas
+  '/total/{period}':
+    get:
+      description: Get the total time left in sleeps/days/hours etc
+      responses:
+        '200':
+          description: The live time left until Christmas
+    parameters:
+      - name: period
+        in: path
+        description: days/sleeps etc
+        required: true
+        schema:
+          type: string
+          enum:
+          - months
+          - weeks
+          - sleeps
+          - days
+          - hours
+          - minutes
+          - seconds
