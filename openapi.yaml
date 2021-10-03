@@ -13,16 +13,8 @@ info:
 externalDocs:
   url: https://docs.christmascountdown.live/api
 servers:
-  - url: https://api-dev.christmascountdown.live/{version}
-    description: Development API server
-    variables:
-      version:
-        default: pine
-  - url: https://api.christmascountdown.live/{version}
+  - url: https://api.christmascountdown.live/pine
     description: Production API server
-    variables:
-      version:
-        default: pine
 paths:
   '/image':
     get:
