@@ -18,6 +18,9 @@
     "url" : "https://docs.christmascountdown.live/api"
   },
   "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/eartharoid/christmas-countdown/pine",
+    "description" : "SwaggerHub API Auto Mocking"
+  }, {
     "url" : "https://api.christmascountdown.live/pine",
     "description" : "Production API server"
   }, {
@@ -39,7 +42,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
+                  "$ref" : "#/components/schemas/response_joke_200"
                 },
                 "example" : {
                   "question" : "How much did Santa pay for his sleigh?",
@@ -92,7 +95,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/response_timeleft_200"
                 },
                 "example" : {
                   "months" : 1,
@@ -130,7 +133,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_2"
+                  "$ref" : "#/components/schemas/response_timeleft_total_200"
                 },
                 "example" : {
                   "days" : 36,
@@ -176,7 +179,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_3"
+                  "$ref" : "#/components/schemas/response_timeleft_period_200"
                 },
                 "example" : {
                   "sleeps" : 37
@@ -190,7 +193,7 @@
   },
   "components" : {
     "schemas" : {
-      "inline_response_200" : {
+      "response_joke_200" : {
         "type" : "object",
         "properties" : {
           "question" : {
@@ -201,7 +204,7 @@
           }
         }
       },
-      "inline_response_200_1" : {
+      "response_timeleft_200" : {
         "type" : "object",
         "properties" : {
           "months" : {
@@ -227,7 +230,7 @@
           }
         }
       },
-      "inline_response_200_2" : {
+      "response_timeleft_total_200" : {
         "type" : "object",
         "properties" : {
           "days" : {
@@ -244,10 +247,10 @@
           }
         }
       },
-      "inline_response_200_3" : {
+      "response_timeleft_period_200" : {
         "type" : "object",
         "properties" : {
-          "{period=null}" : {
+          "{period=string}" : {
             "type" : "number"
           }
         }
