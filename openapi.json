@@ -2,6 +2,7 @@
   "openapi" : "3.0.0",
   "info" : {
     "title" : "Christmas Countdown",
+    "description" : "## Welcome\n\nThe Christmas Countdown API provides an easy way of getting the time left until Christmas, along with some other fun things like Christmas jokes.\n\n## Rate limits\n\nEndpoint rate limits for unidentified requests are defined per-category and act on the requester's IP address.\n\n|Category   |Limit|Period  |\n|-----------|-----|--------|\n|`countdown`|`10` |1 minute|\n|`other`    |`100`|1 minute|\n\n**If you you need a higher limit, please [contact me](https://eartharoid.me/contact).**",
     "termsOfService" : "https://docs.christmascountdown.live/api#terms",
     "contact" : {
       "name" : "Isaac",
@@ -47,6 +48,32 @@
         "responses" : {
           "200" : {
             "description" : "The time left until Christmas",
+            "headers" : {
+              "X-Rate-Limit-Limit" : {
+                "description" : "The number of allowed requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Remaining" : {
+                "description" : "The number of remaining requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Reset" : {
+                "description" : "The number of seconds left in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              }
+            },
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -86,6 +113,32 @@
         "responses" : {
           "200" : {
             "description" : "The total time left until Christmas",
+            "headers" : {
+              "X-Rate-Limit-Limit" : {
+                "description" : "The number of allowed requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Remaining" : {
+                "description" : "The number of remaining requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Reset" : {
+                "description" : "The number of seconds left in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              }
+            },
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -133,6 +186,32 @@
         "responses" : {
           "200" : {
             "description" : "The time left until Christmas",
+            "headers" : {
+              "X-Rate-Limit-Limit" : {
+                "description" : "The number of allowed requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Remaining" : {
+                "description" : "The number of remaining requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Reset" : {
+                "description" : "The number of seconds left in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              }
+            },
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -147,6 +226,64 @@
         }
       }
     },
+    "/weekday" : {
+      "get" : {
+        "tags" : [ "countdown" ],
+        "summary" : "Get the day of the week that Christmas Day is on",
+        "description" : "The day is a number between 0 and 6, starting with **0 as Sunday**.\n\nYou need to convert this number to a day name yourself, either:\n1. using a simple array\n   ```js\n   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];\n   console.log(days[6]); // => \"Saturday\"\n   ```\n2. using built-in methods\n   ```js\n   const i18n = new Intl.DateTimeFormat('en-GB', { weekday: 'long' });\n   console.log(i18n.format(6)); // => \"Saturday\"\n   ```",
+        "parameters" : [ {
+          "name" : "timezone",
+          "in" : "query",
+          "description" : "The timezone",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "default" : "UTC"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The day number (0-6) **starting with Sunday**",
+            "headers" : {
+              "X-Rate-Limit-Limit" : {
+                "description" : "The number of allowed requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Remaining" : {
+                "description" : "The number of remaining requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Reset" : {
+                "description" : "The number of seconds left in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/weekday"
+                },
+                "example" : 6
+              }
+            }
+          }
+        }
+      }
+    },
     "/joke" : {
       "get" : {
         "tags" : [ "other" ],
@@ -155,6 +292,32 @@
         "responses" : {
           "200" : {
             "description" : "A joke",
+            "headers" : {
+              "X-Rate-Limit-Limit" : {
+                "description" : "The number of allowed requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Remaining" : {
+                "description" : "The number of remaining requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Reset" : {
+                "description" : "The number of seconds left in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              }
+            },
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -178,6 +341,32 @@
         "responses" : {
           "200" : {
             "description" : "Jokes",
+            "headers" : {
+              "X-Rate-Limit-Limit" : {
+                "description" : "The number of allowed requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Remaining" : {
+                "description" : "The number of remaining requests in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              },
+              "X-Rate-Limit-Reset" : {
+                "description" : "The number of seconds left in the current period",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                }
+              }
+            },
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -192,23 +381,6 @@
   },
   "components" : {
     "schemas" : {
-      "joke" : {
-        "type" : "object",
-        "properties" : {
-          "question" : {
-            "type" : "string"
-          },
-          "answer" : {
-            "type" : "string"
-          }
-        }
-      },
-      "jokes" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/joke"
-        }
-      },
       "timeleft-combined" : {
         "type" : "object",
         "properties" : {
@@ -258,6 +430,26 @@
           "{period=string}" : {
             "type" : "number"
           }
+        }
+      },
+      "weekday" : {
+        "type" : "number"
+      },
+      "joke" : {
+        "type" : "object",
+        "properties" : {
+          "question" : {
+            "type" : "string"
+          },
+          "answer" : {
+            "type" : "string"
+          }
+        }
+      },
+      "jokes" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/joke"
         }
       }
     }
