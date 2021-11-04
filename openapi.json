@@ -15,9 +15,6 @@
     "version" : "pine"
   },
   "servers" : [ {
-    "url" : "https://virtserver.swaggerhub.com/eartharoid/christmas-countdown/pine",
-    "description" : "SwaggerHub API Auto Mocking"
-  }, {
     "url" : "https://api.christmascountdown.live/pine",
     "description" : "Production API server"
   }, {
