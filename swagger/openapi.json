@@ -30,47 +30,11 @@
     }
   } ],
   "paths" : {
-    "/joke" : {
-      "get" : {
-        "description" : "Get a Christmas joke",
-        "responses" : {
-          "200" : {
-            "description" : "A joke",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/response_joke_200"
-                },
-                "example" : {
-                  "question" : "How much did Santa pay for his sleigh?",
-                  "answer" : "Nothing – it was on the house."
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/jokes" : {
-      "get" : {
-        "description" : "Get all available Christmas jokes",
-        "responses" : {
-          "200" : {
-            "description" : "Jokes",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/response_jokes_200"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/timeleft" : {
       "get" : {
-        "description" : "Get the time left in sleeps/days/hours etc, combined into one response",
+        "tags" : [ "countdown" ],
+        "summary" : "Get the time left in sleeps/days etc, combined into one response",
+        "description" : "The same as `/timeleft/{period}` but all `period`s are combined.",
         "parameters" : [ {
           "name" : "timezone",
           "in" : "query",
@@ -89,7 +53,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/response_timeleft_200"
+                  "$ref" : "#/components/schemas/timeleft-combined"
                 },
                 "example" : {
                   "months" : 1,
@@ -108,7 +72,8 @@
     },
     "/timeleft/total" : {
       "get" : {
-        "description" : "Get the combined total time left until Christmas",
+        "tags" : [ "countdown" ],
+        "summary" : "Get the combined total time left until Christmas",
         "parameters" : [ {
           "name" : "timezone",
           "in" : "query",
@@ -127,7 +92,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/response_timeleft_total_200"
+                  "$ref" : "#/components/schemas/total-timeleft"
                 },
                 "example" : {
                   "days" : 36,
@@ -143,7 +108,8 @@
     },
     "/timeleft/{period}" : {
       "get" : {
-        "description" : "Get the time left in sleeps/days/hours etc",
+        "tags" : [ "countdown" ],
+        "summary" : "Get the time left in sleeps/days etc",
         "parameters" : [ {
           "name" : "period",
           "in" : "path",
@@ -173,10 +139,52 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/response_timeleft_period_200"
+                  "$ref" : "#/components/schemas/timeleft-period"
                 },
                 "example" : {
                   "sleeps" : 37
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/joke" : {
+      "get" : {
+        "tags" : [ "other" ],
+        "summary" : "Get a Christmas joke",
+        "description" : "Returns a joke object (question and answer).",
+        "responses" : {
+          "200" : {
+            "description" : "A joke",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/joke"
+                },
+                "example" : {
+                  "question" : "How much did Santa pay for his sleigh?",
+                  "answer" : "Nothing – it was on the house."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jokes" : {
+      "get" : {
+        "tags" : [ "other" ],
+        "summary" : "Get all available Christmas jokes",
+        "description" : "Returns an array of joke objects.",
+        "responses" : {
+          "200" : {
+            "description" : "Jokes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/jokes"
                 }
               }
             }
@@ -187,7 +195,7 @@
   },
   "components" : {
     "schemas" : {
-      "response_joke_200" : {
+      "joke" : {
         "type" : "object",
         "properties" : {
           "question" : {
@@ -198,13 +206,13 @@
           }
         }
       },
-      "response_jokes_200" : {
+      "jokes" : {
         "type" : "array",
         "items" : {
-          "$ref" : "#/components/schemas/response_jokes_200_inner"
+          "$ref" : "#/components/schemas/joke"
         }
       },
-      "response_timeleft_200" : {
+      "timeleft-combined" : {
         "type" : "object",
         "properties" : {
           "months" : {
@@ -230,7 +238,7 @@
           }
         }
       },
-      "response_timeleft_total_200" : {
+      "total-timeleft" : {
         "type" : "object",
         "properties" : {
           "days" : {
@@ -247,22 +255,11 @@
           }
         }
       },
-      "response_timeleft_period_200" : {
+      "timeleft-period" : {
         "type" : "object",
         "properties" : {
           "{period=string}" : {
             "type" : "number"
-          }
-        }
-      },
-      "response_jokes_200_inner" : {
-        "type" : "object",
-        "properties" : {
-          "question" : {
-            "type" : "string"
-          },
-          "answer" : {
-            "type" : "string"
           }
         }
       }
