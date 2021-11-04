@@ -3,7 +3,7 @@
   "info" : {
     "title" : "Christmas Countdown",
     "description" : "## Welcome\n\nThe Christmas Countdown API provides an easy way of getting the time left until Christmas, along with some other fun things like Christmas jokes.\n\n## Rate limits\n\nEndpoint rate limits for unidentified requests are defined per-category and act on the requester's IP address.\n\n|Category   |Limit|Period  |\n|-----------|-----|--------|\n|`countdown`|`10` |1 minute|\n|`other`    |`100`|1 minute|\n\n**If you you need a higher limit, please [contact me](https://eartharoid.me/contact).**",
-    "termsOfService" : "https://docs.christmascountdown.live/api#terms",
+    "termsOfService" : "https://docs.christmascountdown.live/api#terms-of-use",
     "contact" : {
       "name" : "Isaac",
       "url" : "https://go.eartharoid.me/discord",
