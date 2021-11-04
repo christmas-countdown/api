@@ -2,7 +2,7 @@
   "openapi" : "3.0.0",
   "info" : {
     "title" : "Christmas Countdown",
-    "termsOfService" : "https://docs.christmascountdown.live/api/terms",
+    "termsOfService" : "https://docs.christmascountdown.live/api#terms",
     "contact" : {
       "name" : "Isaac",
       "url" : "https://go.eartharoid.me/discord",
@@ -13,9 +13,6 @@
       "url" : "https://choosealicense.com/licenses/mit"
     },
     "version" : "pine"
-  },
-  "externalDocs" : {
-    "url" : "https://docs.christmascountdown.live/api"
   },
   "servers" : [ {
     "url" : "https://virtserver.swaggerhub.com/eartharoid/christmas-countdown/pine",
@@ -63,10 +60,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "string"
-                  }
+                  "$ref" : "#/components/schemas/response_jokes_200"
                 }
               }
             }
@@ -74,7 +68,7 @@
         }
       }
     },
-    "/timeleft/" : {
+    "/timeleft" : {
       "get" : {
         "description" : "Get the time left in sleeps/days/hours etc, combined into one response",
         "parameters" : [ {
@@ -204,6 +198,12 @@
           }
         }
       },
+      "response_jokes_200" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/response_jokes_200_inner"
+        }
+      },
       "response_timeleft_200" : {
         "type" : "object",
         "properties" : {
@@ -252,6 +252,17 @@
         "properties" : {
           "{period=string}" : {
             "type" : "number"
+          }
+        }
+      },
+      "response_jokes_200_inner" : {
+        "type" : "object",
+        "properties" : {
+          "question" : {
+            "type" : "string"
+          },
+          "answer" : {
+            "type" : "string"
           }
         }
       }
