@@ -10,6 +10,8 @@ if (!PORT) throw new Error('"PORT" is not defined');
 if (!RATELIMIT_MAX) throw new Error('"RATELIMIT_MAX" is not defined');
 if (!RATELIMIT_TIME) throw new Error('"RATELIMIT_TIME" is not defined');
 
+const VERSION = 'pine';
+
 const parseTZ = require('timezone-soft');
 const getTZ = req => parseTZ(req.query?.timezone ?? 'UTC')[0]?.iana;
 
@@ -51,7 +53,7 @@ fastify.addHook('onResponse', (req, res, done) => {
 
 fastify.get('/', () => 'https://christmascountdown.live/api');
 
-fastify.get('/timeleft', req => {
+fastify.get(`/${VERSION}/timeleft`, req => {
 	const timezone = getTZ(req);
 	return {
 		months: christmas.getMonths(timezone),
@@ -64,7 +66,7 @@ fastify.get('/timeleft', req => {
 	};
 });
 
-fastify.get('/timeleft/:period', (req, res) => {
+fastify.get(`/${VERSION}/timeleft/:period`, (req, res) => {
 	const period = req.params?.period;
 	const timezone = getTZ(req);
 	const allowed = ['months', 'weeks', 'sleeps', 'days', 'hours', 'minutes', 'seconds'];
@@ -78,19 +80,19 @@ fastify.get('/timeleft/:period', (req, res) => {
 	return christmas['get' + period.charAt(0).toUpperCase() + period.slice(1)](timezone);
 });
 
-fastify.get('/timeleft/total', req => {
+fastify.get(`/${VERSION}/timeleft/total`, req => {
 	const timezone = getTZ(req);
 	return christmas.getTotal(timezone);
 });
 
-fastify.get('/weekday', req => {
+fastify.get(`/${VERSION}/weekday`, req => {
 	const timezone = getTZ(req);
 	return christmas.date(timezone).getDay();
 });
 
-fastify.get('/joke', () => jokes[Math.floor(Math.random() * jokes.length)]);
+fastify.get(`/${VERSION}/joke`, () => jokes[Math.floor(Math.random() * jokes.length)]);
 
-fastify.get('/jokes', () => jokes);
+fastify.get(`/${VERSION}/jokes`, () => jokes);
 
 fastify.listen(PORT, '0.0.0.0', (error, address) => {
 	if (error) log.error(error);
