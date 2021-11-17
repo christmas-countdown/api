@@ -1,3 +1,3 @@
 # Christmas Countdown API
 
-***COMING SOON***
+**Documentation:** [christmascountdown.live/api](https://christmascountdown.live/api)
