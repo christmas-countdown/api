@@ -173,7 +173,7 @@ module.exports = {
 			'always'
 		],
 		'sort-keys': [
-			'error',
+			'off',
 			'asc',
 			{ 'natural': true }
 		],
