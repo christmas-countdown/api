@@ -1,0 +1,15 @@
+{
+	"dependencies": {
+		"@eartharoid/christmas": "^1.2.1",
+		"dotenv": "^10.0.0",
+		"fastify": "^3.24.0",
+		"fastify-cors": "^6.0.2",
+		"fastify-rate-limit": "^5.6.2",
+		"leeks.js": "^0.2.4",
+		"leekslazylogger": "^4.1.3"
+	},
+	"devDependencies": {
+		"eslint": "^8.2.0",
+		"nodemon": "^2.0.15"
+	}
+}
